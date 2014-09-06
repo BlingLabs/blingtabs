@@ -1,4 +1,17 @@
 body {
   min-width: 250px;
-  overflow-x: hidden;
+  padding: 10px;
+  font-size: 62.5%;
+}
+
+input.search {
+  width: 100%;
+  margin: 0;
+  padding: 5px;
+  background: #EEE;
+  border: none;
+  box-sizing: border-box;
+  outline: none;
+
+  font-size: 1.5em;
 }
