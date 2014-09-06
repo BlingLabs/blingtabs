@@ -10,7 +10,7 @@
  */
 var QUERY = 'kittens';
 
-var kittenGenerator = {
+var blingTabs = {
   /**
    * Flickr URL that will give us lots and lots of whatever we're looking for.
    *
@@ -29,6 +29,17 @@ var kittenGenerator = {
       'sort=interestingness-desc&' +
       'per_page=20',
 
+  loopTabs: function() {
+    console.log("asdf");
+    chrome.tabs.getAllInWindow(null, function(tabs) {
+      for (var i = 0; i < tabs.length; i++) {
+        console.log("title: " + tabs[i].title);
+        console.log("id: " + tabs[i].id);
+        console.log("url: " + tabs[i].url);
+        chrome.tabs.sendRequest(tabs[i].id, { action: "xxx" });
+      }
+    });
+  },
   /**
    * Sends an XHR GET request to grab photos of lots and lots of kittens. The
    * XHR's 'onload' event is hooks up to the 'showPhotos_' method.
@@ -79,5 +90,5 @@ var kittenGenerator = {
 
 // Run our kitten generation script as soon as the document's DOM is ready.
 document.addEventListener('DOMContentLoaded', function () {
-  kittenGenerator.requestKittens();
+  blingTabs.loopTabs();
 });
