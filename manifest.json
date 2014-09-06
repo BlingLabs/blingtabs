@@ -3,8 +3,6 @@
   "name": "BlingTabs",
   "version": "1.0",
   "author": "Bling Labs",
-
-  "default_locale": "en",
   "description": "Simple Tab Search for Chrome.",
 
   "browser_action": {
