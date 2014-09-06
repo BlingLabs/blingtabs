@@ -9,6 +9,7 @@
  * @type {string}
  */
 var QUERY = 'kittens';
+var DEBUG = true;
 
 var blingTabs = {
   /**
@@ -29,15 +30,27 @@ var blingTabs = {
       'sort=interestingness-desc&' +
       'per_page=20',
 
-  loopTabs: function() {
-    console.log("asdf");
+  loopTabs: function(searchString) {
     chrome.tabs.getAllInWindow(null, function(tabs) {
+      var matchingTabs = [];
       for (var i = 0; i < tabs.length; i++) {
+        var tab = tabs[i];
+        var title = tab.title;
+        var url = tab.url;
+        var id = tab.id;
+        if (DEBUG){
         console.log("title: " + tabs[i].title);
         console.log("id: " + tabs[i].id);
-        console.log("url: " + tabs[i].url);
-        chrome.tabs.sendRequest(tabs[i].id, { action: "xxx" });
+        console.log("url: " + tabs[i].url);}
+        if ((title.indexOf(searchString) != -1) || (url.indexOf(searchString) != -1)) {
+          // search string exists in title or url
+          matchingTabs.push(tabs[i]);
+        }
       }
+      if (DEBUG) {
+      for (var i = 0; i < matchingTabs.length; i++) {
+        console.log(matchingTabs[i]);
+      }}
     });
   },
   /**
@@ -90,5 +103,5 @@ var blingTabs = {
 
 // Run our kitten generation script as soon as the document's DOM is ready.
 document.addEventListener('DOMContentLoaded', function () {
-  blingTabs.loopTabs();
+  blingTabs.loopTabs('facebook');
 });
